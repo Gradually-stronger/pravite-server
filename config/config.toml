@@ -1,0 +1,96 @@
+# 通用配置
+[common]
+    # 运行模式(debug:开发，test:测试,release:正式)
+    run_mode = "debug"
+
+# HTTP Server
+[server]
+	Address     = ":8199"
+	ServerAgent = "gf-app"
+	LogPath     = "/tmp/log/gf-app/server"
+	# 请求读取超时时间
+	ReadTimeout = "60s"
+	# 客户端最大Body上传限制大小,默认为8*1024*1024=8MB
+    ClientMaxBodySize = 810241024
+    # 是否开启平滑重启特性，开启时将会在本地增加10000的本地TCP端口用于进程间通信。默认false
+    Graceful = false
+
+	# 静态服务配置
+	# 开关
+	FileServerEnable = false
+	# 静态文件目录
+	ServerRoot = ""
+	# 默认首页检索
+	IndexFiles = ["index.html"]
+	# PProf配置
+	# 是否开启PProf性能调试特性。默认为false
+    PProfEnabled = false
+    # 开启PProf时有效，表示PProf特性的页面访问路径，对当前Server绑定的所有域名有效。
+    PProfPattern = ""
+
+# Logger.
+[logger]
+    Path        = "/tmp/log/gf-app"
+    Level       = "all"
+    Stdout      = true
+    CtxKeys = ["user_id", "trace_id", "span_title", "span_function", "version"]
+# 请求频率限制(需要启用redis配置)
+[rate_limiter]
+    # 是否启用
+    enable = true
+    # 每分钟每个用户允许的最大请求数量
+    count = 10
+    # redis数据库(如果存储方式是redis，则指定存储的数据库)
+    redis_db = 10
+# 跨域请求
+[cors]
+    # 是否启用
+    enable = false
+    # 允许跨域请求的域名列表(*表示全部允许)
+    allow_origins = ["*"]
+    # 允许跨域请求的请求方式列表
+    allow_methods = ["GET","POST","PUT","DELETE","PATCH"]
+    # 允许客户端与跨域请求一起使用的非简单标头的列表
+    allow_headers = []
+    # 请求是否可以包含cookie，HTTP身份验证或客户端SSL证书等用户凭据
+    allow_credentials = true
+    # 可以缓存预检请求结果的时间（以秒为单位）
+    max_age = 7200
+# redis配置
+[redis]
+    # 开关
+    enable = false
+    # 地址
+    addr = "127.0.0.1:6379"
+    # 密码
+    password = ""
+    # 默认库
+    db = 14
+# mysql数据库配置
+[mysql]
+    # 连接地址
+    host = "193.112.205.103"
+    # 连接端口
+    port= 3306
+    # 用户名
+    user = "root"
+    # 密码
+    password = "zhb19970504"
+    # 数据库
+    db_name = "private_work"
+    # 连接参数
+    parameters = "charset=utf8mb4&parseTime=True&loc=Local&allowNativePasswords=true"
+# gorm配置
+[gorm]
+    # 设置连接可以重用的最长时间(单位：秒)
+    max_lifetime = 7200
+    # 设置数据库的最大打开连接数
+    max_open_conns = 150
+    # 设置空闲连接池中的最大连接数
+    max_idle_conns = 50
+    # 数据库表名前缀
+    table_prefix = "p_"
+    # 是否启用自动映射数据库表结构
+    enable_auto_migrate = true
+    # 慢查询阀值(单位：毫秒)
+    slow_sql_limit = 2000
