@@ -5,7 +5,7 @@
 
 # HTTP Server
 [server]
-	Address     = ":8199"
+	Address     = ":8819"
 	ServerAgent = "gf-app"
 	LogPath     = "/tmp/log/gf-app/server"
 	# 请求读取超时时间

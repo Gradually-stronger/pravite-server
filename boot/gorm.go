@@ -53,12 +53,15 @@ func initGorm() (*gorm.DB, error) {
 func autoMigrate(db *gorm.DB) error {
 	return db.AutoMigrate(
 		new(entity.Demo),
+		new(entity.Register),
 	)
 }
 
 // InjectModel
 func InjectModel(container *dig.Container) error {
 	_ = container.Provide(iModel.NewDemo)
+	container.Provide(iModel.NewRegister)
 	_ = container.Provide(func(m *iModel.Demo) model.IDemo { return m })
+	container.Provide(func(m *iModel.Register) model.Register { return m })
 	return nil
 }
