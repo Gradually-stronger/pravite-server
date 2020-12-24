@@ -8,7 +8,7 @@ import (
 
 // GetDemoDB 获取demo存储
 func GetRegisterDB(ctx context.Context, defDB *gorm.DB) *gorm.DB {
-	return getDBWithModel(ctx, defDB, Demo{})
+	return getDBWithModel(ctx, defDB, Register{})
 }
 
 // SchemaRegister register对象
@@ -27,9 +27,9 @@ func (a SchemaRegister) ToRegister() *Register {
 // Register register实体
 type Register struct {
 	Model
-	RecordId string `gorm:"column:record_id";size:32;index;"` // 记录内码
-	UserName string `gorm:"column:user_name";size:255`        // 用户名称
-	PassWord string `gorm:"cloumn:password";size:255`         // 用户密码
+	RecordId string `gorm:"column:record_id";size:32;"` // 记录内码
+	UserName string `gorm:"column:user_name";size:255`  // 用户名称
+	PassWord string `gorm:"column:password";size:255`   // 用户密码
 }
 
 // Register register列表

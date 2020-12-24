@@ -6,7 +6,6 @@ require (
 	github.com/go-redis/redis_rate/v9 v9.0.2
 	github.com/gogf/gf v1.14.2
 	go.uber.org/dig v1.10.0
-	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e // indirect
 	gorm.io/driver/mysql v1.0.3
 	gorm.io/gorm v1.20.6
 )
