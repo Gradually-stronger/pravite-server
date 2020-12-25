@@ -9,3 +9,8 @@ type Register struct {
 	PassWord  string    `json:"password" v:"required"`  // 用户密码
 	CreatedAt time.Time `json:"created_at"`             //创建时间
 }
+
+// RegisterQueryOptions demo对象查询可选参数项
+type RegisterQueryOptions struct {
+	PageParam *PaginationParam // 分页参数
+}

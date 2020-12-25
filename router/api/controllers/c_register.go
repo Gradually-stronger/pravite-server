@@ -32,9 +32,21 @@ func (a *Register) Create(r *ghttp.Request) {
 		gplus.ResError(r, err)
 	}
 	ctx := gplus.NewContext(r)
-	result, err := a.cBll.Create(ctx, data)
+	_, err := a.cBll.Create(ctx, data)
 	if err != nil {
 		gplus.ResError(r, err)
 	}
-	gplus.ResSuccess(r, result)
+
+	gplus.ResOK(r)
+}
+
+// Delete 注销账号
+
+func (a *Register) Delete(r *ghttp.Request) {
+	ctx := gplus.NewContext(r)
+	err := a.cBll.Delete(ctx, r.GetQueryString("id"))
+	if err != nil {
+		gplus.ResError(r, err)
+	}
+	gplus.ResOK(r)
 }

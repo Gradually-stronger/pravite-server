@@ -11,7 +11,6 @@ func RegisterRouters(s *ghttp.Server, container *dig.Container) error {
 	controllers.Inject(container)
 	gr := s.Group("/api")
 	// 注册请求限制中间件
-	//gr.Middleware(middleware.RateLimiterMiddleware())
 	return container.Invoke(func(
 		cDemo *controllers.Demo,
 		cRegister *controllers.Register,
@@ -22,13 +21,11 @@ func RegisterRouters(s *ghttp.Server, container *dig.Container) error {
 			{
 				gDemo.POST("/", cDemo.Create)
 			}
-
 		}
+		gRegister := v1.Group("/register")
 		{
-			gRegister := v1.Group("/register")
-			{
-				gRegister.POST("/", cRegister.Create)
-			}
+			gRegister.POST("/", cRegister.Create)
+			gRegister.DELETE("/", cRegister.Delete)
 		}
 	})
 }
