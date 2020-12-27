@@ -29,7 +29,7 @@ func (a *Register) QueryName(ctx context.Context, params schema.Register) (*sche
 	ok, err := FindOne(ctx, db, &item)
 	if err != nil {
 		return nil, errors.ErrDBServerInternalError
-	} else if !ok {
+	} else if ok {
 		return item.ToSchemaRegister(), nil
 	}
 	return nil, nil
@@ -68,3 +68,14 @@ func (a *Register) Get(ctx context.Context, recordID string, opts ...schema.Regi
 
 	return item.ToSchemaRegister(), nil
 }
+
+//// 登陆验证
+//func (a *Register) Login(ctx context.Context, params schema.Register) (*schema.Register, error) {
+//	var item entity.Register
+//	db := entity.GetRegisterDB(ctx, a.db)
+//	if v := params.UserName; v != "" {
+//		db = db.Where("user_name", v)
+//	}
+//	ok, err := FindOne(ctx, db, &item)
+//
+//}

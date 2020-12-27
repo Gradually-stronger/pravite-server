@@ -43,6 +43,23 @@ func (a *Register) Delete(ctx context.Context, recordID string) error {
 	} else if oldItem == nil {
 		return errors.ErrNotFound
 	}
-
 	return a.RegisterModal.Delete(ctx, recordID)
+}
+
+// 验证登陆
+func (a *Register) Login(ctx context.Context, item schema.Register) (*schema.Register, error) {
+	result, err := a.RegisterModal.QueryName(ctx, item)
+	if err != nil {
+		return nil, err
+	}
+	if result != nil {
+		if result.UserName == item.UserName {
+			if result.PassWord == item.PassWord {
+				return result, err
+			}
+		} else {
+			return nil, err
+		}
+	}
+	return nil, err
 }

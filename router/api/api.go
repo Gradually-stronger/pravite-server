@@ -26,6 +26,7 @@ func RegisterRouters(s *ghttp.Server, container *dig.Container) error {
 		{
 			gRegister.POST("/", cRegister.Create)
 			gRegister.DELETE("/", cRegister.Delete)
+			gRegister.POST("/login", cRegister.Login)
 		}
 	})
 }

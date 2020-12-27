@@ -3,6 +3,7 @@ package controllers
 import (
 	"github.com/gogf/gf/net/ghttp"
 	"gxt-api-frame/app/bll"
+	"gxt-api-frame/app/errors"
 	"gxt-api-frame/app/schema"
 	"gxt-api-frame/library/gplus"
 )
@@ -49,4 +50,23 @@ func (a *Register) Delete(r *ghttp.Request) {
 		gplus.ResError(r, err)
 	}
 	gplus.ResOK(r)
+}
+
+// Login 验证登陆账号
+func (a *Register) Login(r *ghttp.Request) {
+	var data schema.Register
+	if err := gplus.ParseJson(r, &data); err != nil {
+		gplus.ResError(r, err)
+	}
+	ctx := gplus.NewContext(r)
+	result, err := a.cBll.Login(ctx, data)
+	if err != nil {
+		gplus.ResError(r, err)
+	}
+	if result != nil {
+		gplus.ResOK(r)
+	} else {
+		gplus.ResError(r, errors.New400Response("用户名或密码错误"))
+	}
+
 }
