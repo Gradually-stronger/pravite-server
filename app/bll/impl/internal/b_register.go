@@ -26,10 +26,12 @@ func (a *Register) Create(ctx context.Context, item schema.Register) (*schema.Re
 	if err != nil {
 		return nil, err
 	} else if ok != nil {
-		item.RecordId = guid.S()
-		err := a.RegisterModal.Create(ctx, item)
-		if err != nil {
-			return nil, err
+		if ok.UserName != item.UserName {
+			item.RecordId = guid.S()
+			err := a.RegisterModal.Create(ctx, item)
+			if err != nil {
+				return nil, err
+			}
 		}
 	}
 	return nil, errors.New400Response("已有账号名称。")
