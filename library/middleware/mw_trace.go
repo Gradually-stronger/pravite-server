@@ -15,6 +15,7 @@ func TraceIdMiddleware(skippers ...SkipperFunc) ghttp.HandlerFunc {
 		if r.GetCtxVar(gplus.TraceIDKey).String() == "" {
 			r.SetCtxVar(gplus.TraceIDKey, utils.NewTraceID())
 		}
+		r.Response.CORSDefault()
 		r.Middleware.Next()
 	}
 }

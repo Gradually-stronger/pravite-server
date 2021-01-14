@@ -5,6 +5,7 @@ import (
 	"go.uber.org/dig"
 	"gxt-api-frame/router/api"
 )
+
 // InitRouters 初始化路由注册
 func InitRouters(s *ghttp.Server, container *dig.Container) {
 	// 注册api路由组
