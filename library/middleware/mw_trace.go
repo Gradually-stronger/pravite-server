@@ -9,6 +9,7 @@ import (
 func TraceIdMiddleware(skippers ...SkipperFunc) ghttp.HandlerFunc {
 	return func(r *ghttp.Request) {
 		if len(skippers) > 0 && skippers[0](r) {
+			r.Response.CORSDefault()
 			r.Middleware.Next()
 			return
 		}
